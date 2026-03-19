@@ -5,4 +5,4 @@ Gayme, D., Fazel, M., Doyle, J. C., & California Institute of Technology. (n.d.)
 
 Let's Code Physics. (2018, January 17). Complex Numbers for Glowscript 1 - Complex Class. YouTube. https://www.youtube.com/watch?v=nfX6fDIzO_k
 
-‌
+‌Orbit diagram of the logistic map. (2025). Duke.edu. https://webhome.phy.duke.edu/~hsg/513/images/logistic-map-orbit-diagram.html
