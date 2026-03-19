@@ -13,22 +13,23 @@ def newPopFrac(r):
     return r*curr*(1-curr)
 
 #Iterates between 
-for i in range(0,4, .001):
+for i in range(1,4, .001):
     #Iterates through current a certain amount of times
     for N in range(100):
         curr = newPopFrac(i)
     
     for N in range(100):
-        if any((x - curr) ** 2 <= 0.00001 for x in listX):
+        # If the distance between te current position and any x value are te same
+        # tis point is going to be considered a repitition point.
+        if any(abs(x - curr) <= 0.001 for x in listX):
             if listrep.count(curr) < 1:
+                #plot the valeus and append it to the list to prevent repetitions
+                Xpopdots.plot(i, curr)
                 listrep.append(curr)
         listX.append(curr)
         curr = newPopFrac(i)
     
-    #Plot all the values
-    for iter in range(len(listrep)):
-        Xpopdots.plot(i, listrep[iter])
-        
+
     #Clear all the values for the next R-value
     listrep = []
     listX = []
