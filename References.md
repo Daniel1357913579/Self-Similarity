@@ -1,5 +1,8 @@
 Mandelbrot vs Logistic Map. (2024). Sci-Pi.org.uk. https://www.sci-pi.org.uk/mandel/mandel_vs_log.html
 
 
-https://murray.cds.caltech.edu/images/murray.cds/d/dc/DenniceLogisticsMandelbrot.pdf
-https://www.youtube.com/watch?v=nfX6fDIzO_k
+Gayme, D., Fazel, M., Doyle, J. C., & California Institute of Technology. (n.d.). Connections II: Fundamentals of Network Science 2006 [Review of Connections II: Fundamentals of Network Science 2006]. Https://Murray.cds.caltech.edu. Retrieved March 19, 2026, from https://murray.cds.caltech.edu/images/murray.cds/d/dc/DenniceLogisticsMandelbrot.pdf
+
+Let's Code Physics. (2018, January 17). Complex Numbers for Glowscript 1 - Complex Class. YouTube. https://www.youtube.com/watch?v=nfX6fDIzO_k
+
+‌
