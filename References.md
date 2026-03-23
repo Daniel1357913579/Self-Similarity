@@ -7,4 +7,4 @@ Let's Code Physics. (2018, January 17). Complex Numbers for Glowscript 1 - Compl
 
 ‌Orbit diagram of the logistic map. (2025). Duke.edu. https://webhome.phy.duke.edu/~hsg/513/images/logistic-map-orbit-diagram.html
 
-Pi in mandelbrot. (2001). https://www.doc.ic.ac.uk/~jb/teaching/jmc/pi-in-mandelbrot.pdf
+KLEBANOFF, A. (2001). Pi in mandelbrot. World Scientific Publishing Company. https://www.doc.ic.ac.uk/~jb/teaching/jmc/pi-in-mandelbrot.pdf
