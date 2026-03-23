@@ -21,7 +21,7 @@ for i in range(1,4, .001):
     for N in range(100):
         # If the distance between te current position and any x value are te same
         # tis point is going to be considered a repitition point.
-        if any(abs(x - curr) <= 0.001 for x in listX):
+        if any(x-curr <= 0.001 or curr-x <= 0.001  for x in listX):
             if listrep.count(curr) < 1:
                 #plot the valeus and append it to the list to prevent repetitions
                 Xpopdots.plot(i, curr)
