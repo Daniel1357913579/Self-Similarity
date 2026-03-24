@@ -29,11 +29,17 @@ class Complex:
 
 black = color.black
 
+#percision
+per = 0.01
+total_iterations = 500
+speed = False
+
+
 #craft the graph
 mandelbrot_graph = graph(title="Mandelbrot", ytitle="Complex Numbers", xtitle="Real Numbers")
 #make a dots category for dots that are found in the mandelbrot set
-mandelbrot_dots = gdots(graph=mandelbrot_graph, color=black)
-non_mandelbrot_dots = gdots(graph=mandelbrot_graph, color=color.red)
+mandelbrot_dots = gdots(graph=mandelbrot_graph, color=black, radius=per)
+non_mandelbrot_dots = gdots(graph=mandelbrot_graph, color=color.red, radius=per*2)
 
 #real max and min
 real_max = 1
@@ -43,10 +49,6 @@ real_min = -2.5
 imagine_max = 1
 imagine_min = -1
 
-#percision
-per = 0.010
-total_iterations = 100
-speed = False
 
 #find the next value in the mandelbrot set given a certain z and c value.
 def mandelbrot_next(z, c):
@@ -69,13 +71,10 @@ for i in range(real_min, real_max, per):
         if in_mandelbrot[0]:
             mandelbrot_dots.plot(i, j)
         else:
-            if not speed:
-                total = total_iterations - in_mandelbrot[1]
-                chosen_blue = 1 - total / total_iterations
-                chosen_color = vec(1, 0, chosen_blue)
-                set = gdots(graph=mandelbrot_graph, color=chosen_color)
-                set.plot(i,j)
-            else:
-                non_mandelbrot_dots.plot(i,j)
+            total = total_iterations - in_mandelbrot[1]
+            chosen_blue = 1 - total / total_iterations
+            chosen_color = vec(1, 0, chosen_blue)
+            set = gdots(graph=mandelbrot_graph, color=chosen_color, radius=per*2)
+            set.plot(i,j)
 
         
