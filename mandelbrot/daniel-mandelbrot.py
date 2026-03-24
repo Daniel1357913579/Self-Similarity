@@ -1,6 +1,6 @@
 Web VPython 3.2
-#creates the graph
-set = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary") 
+#creates the graph, and the boundaries of the graph.
+set = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary", xmax =2.0, xmin = -2.0, ymax = 2.0, ymin = -2.0)
 for r in range(-2,.5,.01):   #iterates along the real values; -2, .5 range due to reference: sci-pi.org.uk/mandel/mandel_vs_log.html 
     for i in range(-2, 2, .01): #iterates along the imaginary values
         #TAKES ~2 SECONDS FOR -2,.5,.01; -2,2,.01; N=500 steps
