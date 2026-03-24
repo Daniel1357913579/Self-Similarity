@@ -26,24 +26,21 @@ class Complex:
             return current
         return exponiate(n-1, current=self.multiply(self))
 
-
 black = color.black
 
 #percision
 per = 0.01
-total_iterations = 500
-speed = False
-
+total_iterations = 75
 
 #craft the graph
-mandelbrot_graph = graph(title="Mandelbrot", ytitle="Complex Numbers", xtitle="Real Numbers")
+mandelbrot_graph = graph(title="Mandelbrot", ytitle="Complex Numbers", xtitle="Real Numbers", height=640)
 #make a dots category for dots that are found in the mandelbrot set
-mandelbrot_dots = gdots(graph=mandelbrot_graph, color=black, radius=per)
-non_mandelbrot_dots = gdots(graph=mandelbrot_graph, color=color.red, radius=per*2)
+mandelbrot_dots = gdots(graph=mandelbrot_graph, color=black, radius=per*50)
+non_mandelbrot_dots = gdots(graph=mandelbrot_graph, color=color.red, radius=per * 50)
 
 #real max and min
-real_max = 1
-real_min = -2.5
+real_max = 0.5
+real_min = -2
 
 #complex-max and min
 imagine_max = 1
@@ -72,9 +69,7 @@ for i in range(real_min, real_max, per):
             mandelbrot_dots.plot(i, j)
         else:
             total = total_iterations - in_mandelbrot[1]
-            chosen_blue = 1 - total / total_iterations
-            chosen_color = vec(1, 0, chosen_blue)
-            set = gdots(graph=mandelbrot_graph, color=chosen_color, radius=per*2)
+            chosen_hue = 1 - total / total_iterations
+            chosen_color = vec(chosen_hue, 1, 1)
+            set = gdots(graph=mandelbrot_graph, color=color.hsv_to_rgb(chosen_color), radius=per* 50)
             set.plot(i,j)
-
-        
