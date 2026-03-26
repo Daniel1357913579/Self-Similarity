@@ -18,7 +18,7 @@ scene.append_to_caption("Magnification: ")
 smag = wtext(text = '{:1.0f}'.format(startMag*100)+"%\n")
 scene.delete()
 setg = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary", xmax =startX+(2.0)/startMag, xmin = startX+(-2.0)/startMag, ymax = startY+(2.0)/startMag, ymin = startY+(-2.0)/startMag, height  = 650)
-#functions called when adjusting sliders
+
 def createX(evt):
     console.log(evt)
     global startX
@@ -30,6 +30,7 @@ def createX(evt):
     setg = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary", xmax =startX+(2.0)/startMag, xmin = startX+(-2.0)/startMag, ymax = startY+(2.0)/startMag, ymin = startY+(-2.0)/startMag, height  = 650)
     for r in range(startX+(-2.0)/startMag,startX+(2.0)/startMag, .02/startMag):   #iterates along the real values; -2, .5 range due to reference: sci-pi.org.uk/mandel/mandel_vs_log.html 
         for i in range(startY+(-2.0)/startMag, startY+(2.0)/startMag, .02/startMag): #iterates along the imaginary values
+            #rate(10000)
             #TAKES ~2 SECONDS FOR -2,.5,.01; -2,2,.01; N=500 steps
             cZr = r #current Z real component starts at real value r
             cZi = i #current Z imaginary component starts at imaginary value i
@@ -56,6 +57,7 @@ def createY(evt):
     setg = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary", xmax =startX+(2.0)/startMag, xmin = startX+(-2.0)/startMag, ymax = startY+(2.0)/startMag, ymin = startY+(-2.0)/startMag, height  = 650)
     for r in range(startX+(-2.0)/startMag,startX+(2.0)/startMag, .02/startMag):   #iterates along the real values; -2, .5 range due to reference: sci-pi.org.uk/mandel/mandel_vs_log.html 
         for i in range(startY+(-2.0)/startMag, startY+(2.0)/startMag, .02/startMag): #iterates along the imaginary values
+            #rate(10000)
             #TAKES ~2 SECONDS FOR -2,.5,.01; -2,2,.01; N=500 steps
             cZr = r #current Z real component starts at real value r
             cZi = i #current Z imaginary component starts at imaginary value i
@@ -82,6 +84,7 @@ def createMag(evt):
     setg = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary", xmax =startX+(2.0)/startMag, xmin = startX+(-2.0)/startMag, ymax = startY+(2.0)/startMag, ymin = startY+(-2.0)/startMag, height  = 650)
     for r in range(startX+(-2.0)/startMag,startX+(2.0)/startMag, .02/startMag):   #iterates along the real values; -2, .5 range due to reference: sci-pi.org.uk/mandel/mandel_vs_log.html 
         for i in range(startY+(-2.0)/startMag, startY+(2.0)/startMag, .02/startMag): #iterates along the imaginary values
+            #rate(10000)
             #TAKES ~2 SECONDS FOR -2,.5,.01; -2,2,.01; N=500 steps
             cZr = r #current Z real component starts at real value r
             cZi = i #current Z imaginary component starts at imaginary value i
@@ -99,6 +102,7 @@ def createMag(evt):
 #default code
 for r in range(startX+(-2.0)/startMag,startX+(2.0)/startMag, .02/startMag):   #iterates along the real values; -2, .5 range due to reference: sci-pi.org.uk/mandel/mandel_vs_log.html 
     for i in range(startY+(-2.0)/startMag, startY+(2.0)/startMag, .02/startMag): #iterates along the imaginary values
+        rate(10000) #<- procedurally loads the graph by sections
         #TAKES ~2 SECONDS FOR -2,.5,.01; -2,2,.01; N=500 steps
         cZr = r #current Z real component starts at real value r
         cZi = i #current Z imaginary component starts at imaginary value i
@@ -113,4 +117,6 @@ for r in range(startX+(-2.0)/startMag,startX+(2.0)/startMag, .02/startMag):   #i
                 break
         if send: #adds to plot if the magnitude of the points is less than 2
             gdots(graph = setg, color = color.red, radius = .3).plot(r, i) #plots points; each dot has a radius of .3 
+#        else: 
+#            total = .02/startMag
 #Graph takes 1 min ~50 seconds for -2, .5, .001; -2, 2, .001; N=1000 steps
