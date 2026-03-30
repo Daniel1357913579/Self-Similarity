@@ -7,12 +7,12 @@ startMag = 1
 #slider setup
 scene.caption = ""
 scene.append_to_caption("\nHere is a graph:\n")
-Xslider = slider(bind = createX, min = -2.5, max = 2.5, value = 0, step = .1, disabled = True)
+Xslider = slider(bind = createX, min = -2.5, max = 2.5, value = 0, step = .01, disabled = True)
 scene.append_to_caption("X-Coordinate Center: ")
-sx = wtext(text = '{:1.1f}'.format(startX)+"\n")
-Yslider = slider(bind = createY, min = -2.5, max = 2.5, value = 0, step = .1, disabled = True)
+sx = wtext(text = '{:1.2f}'.format(startX)+"\n")
+Yslider = slider(bind = createY, min = -2.5, max = 2.5, value = 0, step = .01, disabled = True)
 scene.append_to_caption("Y-Coordinate Center: ")
-sy = wtext(text = '{:1.1f}'.format(startY)+"\n")
+sy = wtext(text = '{:1.2f}'.format(startY)+"\n")
 Magslider = slider(bind = createMag, min = .1, max = 20, value = 1, step = .10, disabled = True)
 scene.append_to_caption("Magnification: ")
 smag = wtext(text = '{:1.0f}'.format(startMag*100)+"%\n")
@@ -67,7 +67,7 @@ def createX(evt):
     global startX
     startX = evt.value #variable update
     global sx
-    sx.text = '{:1.1f}'.format(startX)+"\n" #wtext update
+    sx.text = '{:1.2f}'.format(startX)+"\n" #wtext update
     global setg #deletes then recreates mandelbrot graph
     setg.delete()
     setg = graph(title = "Mandelbrot Set", xtitle = "Real", ytitle = "Imaginary", xmax =startX+(2.0)/startMag, xmin = startX+(-2.0)/startMag, ymax = startY+(2.0)/startMag, ymin = startY+(-2.0)/startMag, height  = 650, width = 650)
@@ -95,23 +95,23 @@ def createX(evt):
     global Xslider
     if startMag > 10:
         Xslider.delete()
-        Xslider = slider(bind = createX, min = -.25, max = .25, value = 0, step = .01, disabled = True)
+        Xslider  = slider(bind = createX, min = -.25, max = .25, value = 0, step = .01)
     else: 
         Xslider.delete()
-        Xslider = slider(bind = createX, min = -2.5, max = 2.5, value = 0, step = .1, disabled = True)
+        Xslider = slider(bind = createX, min = -2.5, max = 2.5, value = 0, step = .1)
     global Yslider
     if startMag > 10:
         Yslider.delete()
-        Yslider  = slider(bind = createY, min = -.25, max = .25, value = 0, step = .01, disabled = True)
+        Yslider  = slider(bind = createY, min = -.25, max = .25, value = 0, step = .01)
     else: 
         Yslider.delete()
-        Yslider = slider(bind = createY, min = -2.5, max = 2.5, value = 0, step = .1, disabled = True)
+        Yslider = slider(bind = createY, min = -2.5, max = 2.5, value = 0, step = .1)
 def createY(evt):
     console.log(evt)
     global startY
     startY = evt.value
     global sy
-    sy.text= '{:1.1f}'.format(startY)+"\n"
+    sy.text= '{:1.2f}'.format(startY)+"\n"
 
     global setg
     setg.delete()
@@ -198,7 +198,11 @@ Xslider.disabled = False
 Yslider.disabled = False
 Magslider.disabled = False
 def swap(typeSlider):
-    newSlider = typeSlider
-    typeSlider.delete()
-    typeSlider = newSlider
+    if startMag > 10:
+        newSlider = typeSlider
+        typeSlider.delete()
+        typeSlider = newSlider
+    else: 
+        newSlider = slider (bind = typeSlider.bind, min = .01, max = .1)
+        
 #Graph takes 1 min ~50 seconds for -2, .5, .001; -2, 2, .001; N=1000 steps
