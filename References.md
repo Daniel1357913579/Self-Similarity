@@ -12,4 +12,4 @@ Let's Code Physics. (2018, January 17). Complex Numbers for Glowscript 1 - Compl
 
 KLEBANOFF, A. (2001). Pi in mandelbrot. World Scientific Publishing Company. https://www.doc.ic.ac.uk/~jb/teaching/jmc/pi-in-mandelbrot.pdf
 
-Logistic Map. (2020). Form and Formula. https://blbadger.github.io/logistic-map.html
+Logistic Map. (2021). Form and Formula. https://blbadger.github.io/logistic-map.html
