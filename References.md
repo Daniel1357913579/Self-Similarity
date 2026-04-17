@@ -34,3 +34,6 @@ Boeing, G. (2015, March 26). Chaos Theory and the Logistic Map. Geoff Boeing. ht
 Perrier, F., & Girault, F. (2022). Scaling and fine structure of superstable periodic orbits in the logistic map. Chaos, Solitons & Fractals, 165, 112767. https://doi.org/10.1016/j.chaos.2022.112767
 
 ‌
+Parke, J. (2026). .:| Working with UF - Map of the Mandelbrot Set |:. Infinite-Art.com. https://www.infinite-art.com/samplechapter/wwufmap.html
+
+‌
