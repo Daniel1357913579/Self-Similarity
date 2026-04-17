@@ -20,7 +20,6 @@ Celikovsky, Sergej, et al. “Evolutionary Algorithms and Chaotic Systems.” Li
 
 
 Mandelbrot, Benoit B., and Michael Frame. “Fractals.” Encyclopedia of Physical Science and Technology, 2003, pp. 185–207, https://doi.org/10.1016/b0-12-227410-5/00259-3.
-
 ‌
 
 ‌(n.d.). Fractal Dimension Excersize [Review of Fractal Dimension Excersize]. Cornell Center for Advanced Computing; Oxford University Press. Retrieved April 17, 2026, from https://cac.cornell.edu/myers/teaching/ComputationalMethods/ComputerExercises/FractalDimensions/FractalDimensions.pdf
