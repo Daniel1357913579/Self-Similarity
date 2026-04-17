@@ -12,4 +12,17 @@ Let's Code Physics. (2018, January 17). Complex Numbers for Glowscript 1 - Compl
 
 KLEBANOFF, A. (2001). Pi in mandelbrot. World Scientific Publishing Company. https://www.doc.ic.ac.uk/~jb/teaching/jmc/pi-in-mandelbrot.pdf
 
+
 Logistic Map. (2021). Form and Formula. https://blbadger.github.io/logistic-map.html
+
+
+Celikovsky, Sergej, et al. “Evolutionary Algorithms and Chaotic Systems.” Library of Institute of Information Theory and Automation, Studies in Computational Intelligence 267, Jan. 2010, library.utia.cas.cz/separaty/2010/TR/celikovsky-0340153.pdf. Accessed 17 Apr. 2026.
+
+
+Mandelbrot, Benoit B., and Michael Frame. “Fractals.” Encyclopedia of Physical Science and Technology, 2003, pp. 185–207, https://doi.org/10.1016/b0-12-227410-5/00259-3.
+
+‌
+
+‌(n.d.). Fractal Dimension Excersize [Review of Fractal Dimension Excersize]. Cornell Center for Advanced Computing; Oxford University Press. Retrieved April 17, 2026, from https://cac.cornell.edu/myers/teaching/ComputationalMethods/ComputerExercises/FractalDimensions/FractalDimensions.pdf
+
+‌
