@@ -25,3 +25,12 @@ Mandelbrot, Benoit B., and Michael Frame. “Fractals.” Encyclopedia of Physic
 ‌(n.d.). Fractal Dimension Excersize [Review of Fractal Dimension Excersize]. Cornell Center for Advanced Computing; Oxford University Press. Retrieved April 17, 2026, from https://cac.cornell.edu/myers/teaching/ComputationalMethods/ComputerExercises/FractalDimensions/FractalDimensions.pdf
 
 ‌
+Boeing, G. (2016). Visual Analysis of Nonlinear Dynamical Systems: Chaos, Fractals, Self-Similarity and the Limits of Prediction. Systems, 4(4), 37. https://doi.org/10.3390/systems4040037
+
+
+Boeing, G. (2015, March 26). Chaos Theory and the Logistic Map. Geoff Boeing. https://geoffboeing.com/2015/03/chaos-theory-logistic-map/
+
+‌
+Perrier, F., & Girault, F. (2022). Scaling and fine structure of superstable periodic orbits in the logistic map. Chaos, Solitons & Fractals, 165, 112767. https://doi.org/10.1016/j.chaos.2022.112767
+
+‌
