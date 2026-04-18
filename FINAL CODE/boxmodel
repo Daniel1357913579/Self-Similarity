@@ -1,0 +1,105 @@
+Web VPython 3.2
+
+#get the next value of the logistic map equation
+def next(r, pn):
+    return r * pn * (1 - pn)
+
+#graph
+precision = 0.05
+g = graph(title="Bifurcation Diagram of the Logistic Map", xtitle="bifurcation parameter (r)", ytitle="final orbit", width=500,height=500)
+d = gdots(color=color.red, radius=precision, graph=g)
+
+
+#make the boxes
+coordinates = {}
+minR = -2
+maxR = 4
+
+maxP = 0
+minP = 0
+for r in range(minR,maxR, precision):
+    rate(10000000000000)
+    #create the inital value and iterate upon it
+    p = 0.1
+
+        
+    #all possible population fractions
+    list_x = []
+    #make a list for all the dots represented on the graph
+    plotted = []
+
+    #go through and plot
+    list_p = []
+    pcurr = round(p, 5)
+    coordinates[r] = []
+    
+    for i in range(10000):
+        list_p.append(pcurr)
+        p = next(r, p)
+        pcurr = round(p, 5)
+    for i in range(5000):
+        pcurr = round(p, 5)
+        if plotted.count(pcurr) < 1:
+            d.plot(r, pcurr)
+            coordinates[r].append(pcurr)
+            plotted.append(pcurr)
+            maxP = max(maxP, pcurr)
+            minP = min(minP, pcurr)
+
+        list_x.append(pcurr)
+        p = next(r, p)
+#loop through the box counting model
+total_boxes = 0
+boxes_in_fractal = 0
+dd = gdots(graph=g, radius=precision, color=color.blue)
+
+box_g = graph(title="Approximation of the Fractal Dimension using the Box Counting Method", xtitle="ln(1/s)", ytitle="ln(N(s))", fast=True)
+box_gpoints = gdots(color=color.red, graph=box_g)
+box_gcurve = gcurve(color=color.blue, graph=box_g)
+
+
+coorX = []
+coorY = []
+for v in range(1, 7, 1):
+    rate(1000000000000)
+    
+    box_dimension = pow(0.5, v)
+    
+    for i in range(minR, maxR, box_dimension):
+        for j in range(minP, maxP, box_dimension):
+            total_boxes += 1
+            
+            for key, value in coordinates.items():
+                if i + box_dimension > key and key > i:
+                    if any(y + box_dimension > j and j > y for y in value):
+                        boxes_in_fractal += 1
+    
+    box_gcurve.plot(log(1/box_dimension), log(boxes_in_fractal))
+    box_gpoints.plot(log(1/box_dimension), log(boxes_in_fractal))
+    
+    coorX.append(log(1/box_dimension))
+    coorY.append(log(boxes_in_fractal))
+    total_boxes = 0
+    boxes_in_fractal = 0
+
+slopeApprox = 0
+totalViewed = 0
+for i in range(1, len(coorX)):
+    xVal = coorX[i]
+    yVal = coorY[i]
+    pXVal = coorX[i-1]
+    pYVal = coorY[i-1]
+    
+    sNumerator = yVal - pYVal
+    sDenominator = xVal - pXVal
+    slopeApprox += sNumerator / sDenominator
+    totalViewed += 1
+
+slopeApprox /= totalViewed
+print("Fractal Dimension", slopeApprox)
+
+
+
+
+
+    
