@@ -1,1 +1,1 @@
-# Connecting Madelbrot's Dynasty to the Logistic Map
+# Connecting Mandelbrot's Dynasty to the Logistic Map
