@@ -79,7 +79,7 @@ startMag = 1
 scene.caption = "" 
 scene.append_to_caption("\nHere is a graph:\n - Press 1 to zoom out, 2 to zoom in\n - Use arrows to shift center\n")
  
-but = button(bind = crossHair, text = 'Crosshair Toggle. Use Q(-) and W(+) to change size')
+but = button(bind = crossHair, text = 'Crosshair Toggle.\nUse Q(-) and W(+) to change length\nUse E(-) and R(+) to change magnification')
 so = wtext(text = ' {:1.1f}'.format(hairLen)+"L " + '{:1.1f}'.format(hairMag)+"M\n")
 
 scene.append_to_caption("\nX-Coordinate Center: ")
