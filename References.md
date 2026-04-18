@@ -37,3 +37,6 @@ Perrier, F., & Girault, F. (2022). Scaling and fine structure of superstable per
 Parke, J. (2026). .:| Working with UF - Map of the Mandelbrot Set |:. Infinite-Art.com. https://www.infinite-art.com/samplechapter/wwufmap.html
 
 ‌
+Measuring fractal dimension by box-counting — PoreSpy documentation. (n.d.). Porespy.org. https://porespy.org/examples/metrics/tutorials/computing_fractal_dim.html
+
+‌
