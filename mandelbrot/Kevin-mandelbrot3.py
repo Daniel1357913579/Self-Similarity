@@ -33,10 +33,10 @@ def key_pressed(evt):
     k = evt.key
     if k == 'q' and hairLen > 0.2:
         hairLen-=0.2
-        so.text = '{:1.1f}'.format(hairLen)+"\n"
+        so.text = ' {:1.1f}'.format(hairLen)+"\n"
     if k == 'w' and hairLen < 1:
         hairLen+=0.2
-        so.text = '{:1.1f}'.format(hairLen)+"\n"
+        so.text = ' {:1.1f}'.format(hairLen)+"\n"
     if running:
         return
     if k == 'up':
@@ -73,8 +73,8 @@ startMag = 1
 scene.caption = "" 
 scene.append_to_caption("\nHere is a graph:\n - Press 1 to zoom out, 2 to zoom in\n - Use arrows to shift center\n")
  
-but = button(bind = crossHair, text = 'Crosshair Toggle')
-so = wtext(text = '{:1.1f}'.format(hairLen)+"\n")
+but = button(bind = crossHair, text = 'Crosshair Toggle. Use Q(-) and W(+) to change size')
+so = wtext(text = ' {:1.1f}'.format(hairLen)+"\n")
 
 scene.append_to_caption("\nX-Coordinate Center: ")
 sx = wtext(text = '{:1.1f}'.format(startX)+"\n")
