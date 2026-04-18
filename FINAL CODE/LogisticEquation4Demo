@@ -1,0 +1,93 @@
+Web VPython 3.2
+ratEmin = float(input("Enter a minimum r value"))
+ratEmax = float(input("Enter a maximum r value"))
+ratEspacing = float(input("Enter an interval between r values (Recommended: 0.001)"))
+toggleBoxes = False
+toggleBoxes = bool(input("Bins? (True/False)"))
+if toggleBoxes == True:
+    binSize = float(winput("Enter the box side length"))
+
+
+#ratEmin = float(input("Minimum rate plotted:"))
+#ratEmax = float(input("Maximum rate plotted:"))
+#ratEspacing = float(input("Interval: "))
+popgraph = graph(title = "Stable Orbits vs Rate", xtitle = "Rate of Change", ytitle = "Orbits", width = 1250, height = 600, ymax = 1.5, ymin = -.5)
+if toggleBoxes:
+    popgraph.xmax = ratEmax + 3
+Xpopdots = gdots(color = color.purple, graph = popgraph, radius = .25)
+countdotsgraph = graph(title = "Number of Orbits vs Rate", xtitle = "Rate of Change", ytitle = "Number of Orbits", )
+countdots = gvbars(color = color.purple, graph = countdotsgraph, delta = .015625)#delta = .5)
+feigengraph = graph(title = "Feigenbound throughout the graph", ymax = 10, ymin = -10)
+feidots = gdots(graph = feigengraph, color =color.purple)
+Dgraph = graph(title = "Dimensionality of the graph given binSize", xtitle = "Rate", ytitle = "Number of Dots contained")
+Ddots = gdots(graph = Dgraph, color = color.purple, radius = .5)
+#Set the inital values
+#The seed value
+feiNeg = 0
+def newPopFrac(r):
+    return r*curr*(1-curr)
+#Iterates between 
+for i in range(ratEmin,ratEmax, ratEspacing):
+    curr = .125
+    listX = [] #Inventory of the points that happened in the fixed loop
+    listrep = []
+#    listrepSizeOLD = len(listrep)
+#    listrepSizeMax = len(listrep)
+    #Iterates through current a certain amount of times
+    for N in range(100000):
+        curr = newPopFrac(i)
+    for N in range(500):
+        rcurr = round(curr,5)
+        # If the distance between te current position and any x value are te same
+        # tis point is going to be considered a repitition point.
+        #if any((round(x,4) - round(curr,4)) != 0 for x in listX):
+        if listrep.count(rcurr) < 1:
+            #plot the valeus and append it to the list to prevent repetitions
+            #gdots(color = vec((1-N)*-.125,(1-N)*-.5,(1-N)*-.015625), graph = popgraph, radius = .3).plot(i, round(curr,5)) #The lower the saturation, the larger the number of repetitions bewteen new repetitions
+            #Xpopdots.plot((-i/1.6)+.5, -curr*2) #comparison testing
+            Xpopdots.plot(i, curr)
+            listrep.append(rcurr)                    
+        listX.append(rcurr)
+        curr = newPopFrac(i)
+#    #Clear all the values for the next R-value
+#    if (listrepSizeOLD < len(listrep)):
+#        feidots.plot(i, (feiNeg)/(len(listrep)))
+#        feiNeg = len(listrep)
+#    countdots.plot(i, len(listrep))
+#    listrepSizeOLD = len(listrep)
+#    listrepSizeMax = len(listrep) if listrepSizeMax <= len(listrep) else listrepSizeMax 
+    listrep = []
+    listX = []
+    curr = .125
+print("Number of points", len(Xpopdots.data))
+#print(Xpopdots.data[0])
+#this part checks the number of dots belonging to Rate X in Xpopdots
+if toggleBoxes:
+    for binRow in range(-2.0,4.0, binSize): #iterates on bin height 
+        for binCol in range(-2.0,4.0, binSize):#iterates on bin length
+            num = 0
+            rate(100/binSize)
+            binColFar = binCol + binSize
+            binRowFar = binRow + binSize
+            #if (x[0] > binRow and x[0] < (binSize+binRow) and x[1] > binCol and x[1] < (binSize+binCol) for x in Xpopdots.data):
+            for x in Xpopdots.data:
+                    if (x[1] >= binRow and x[1] < (binRowFar) and x[0] >= binCol and x[0] < (binColFar)): #and x[1] > binCol and x[1] <= (binSize+binCol)):
+                        num = num + 1
+            if num > 0:
+                #rate(1000)
+                txt = 'Coordinates: ( ' + binCol + " , " + binRow + ' )to ( ' + binColFar + " , " + binRowFar + ' ) ' , " # of points:",num
+                gcurve(graph = popgraph, color = vec(num*num*num/2048, 0, num/128), label = txt).plot([[binCol+.01,binRow], [binColFar-.01, binRow]])
+                gcurve(graph = popgraph, color = vec(num*num*num/2048, 0, num/128)).plot([[binCol,binRow], [binCol, binRowFar-.01]])
+                gcurve(graph = popgraph, color = vec(num*num*num/2048, 0, num/128)).plot([[binColFar-.01,binRow], [binColFar-.01, binRowFar-.01]])
+                gcurve(graph = popgraph, color = vec(num*num*num/2048, 0, num/128)).plot([[binCol+.01,binRowFar-.01], [binColFar-.01, binRowFar-.01]])
+                    #if the number falls within the bin, plot it
+                #then add it to the total list of dots.
+                
+                #gdots(graph = Dgraph, color = color.green).plot(x[0], x[0])
+                #if (x[0] >= binRow and x[0] <= (binSize+binRow) and x[1] >= binCol and x[1] <= (binSize+binCol)): #checks position in/out of bin
+                #    num += 1.
+
+
+#In order to calculate Hausdorff dimension/fractal dimension/capacity dimension we must generate series of squares size E over a volume V
+#Then find the limit of log(V/E)/log(E)
+#We already have a series of squares.
