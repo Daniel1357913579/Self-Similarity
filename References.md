@@ -28,6 +28,4 @@ Measuring fractal dimension by box-counting — PoreSpy documentation. (n.d.). P
 
 ‌Orbit diagram of the logistic map. (2025). Duke.edu. https://webhome.phy.duke.edu/~hsg/513/images/logistic-map-orbit-diagram.html
 
-
-
-‌
+Elert, G. (1997). 4.2 Logistic Equation. Hypertextbook.com; hypertextbook. https://hypertextbook.com/chaos/logistic/
