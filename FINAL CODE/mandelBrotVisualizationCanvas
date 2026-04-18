@@ -1,0 +1,224 @@
+Web VPython 3.2
+class Complex:
+    def __init__(self, real, imaginary):
+        self.real = real
+        self.imaginary = imaginary
+    
+    def add(self, c):
+        sum_real = self.real + c.real
+        sum_imaginary = self.imaginary + c.imaginary
+        return Complex(sum_real, sum_imaginary)
+    
+    def multiply(self, c):
+        q = self.real * c.real
+        w = self.real * c.imaginary
+        e = self.imaginary * c.real
+        r = self.imaginary * c.imaginary  * -1
+        
+        sum_real = q + r
+        sum_imaginary = w + e
+        return Complex(sum_real, sum_imaginary)
+    
+    def exponiate(self, n, current=0):
+        if n <= 0:
+            return current
+        return exponiate(n-1, current=self.multiply(self))
+    def magnitude(self):
+        return sqrt(self.real ** 2 + self.imaginary * self.imaginary * -1)
+
+
+
+class Resolution:
+    def __init__(self, w, h):
+        self.w = w
+        self.h = h
+        #auto calculate the center
+        self.c = (ceil(self.w/2), ceil(self.h/2))
+    
+        
+class Memory:
+    #memory stores value in a grid shape and can expand in multiple directions
+    def __init__(self):
+        self.memory = []
+        
+    def add_row(self, r):
+        #expects a row
+        self.memory.append(r)
+    def pop_row(self, i):
+        #remove a row from memory
+        self.memory.pop(i)
+        
+    def add_column(self, c):
+        if len(c) == len(self.memory):
+            for i in range(len(c)):
+                self.memory[i].append(c[i])
+    def set_value(self, coor, v):
+        self.memory[coor[0]][coor[1]] = v
+        
+    def get_value(self, coor):
+        return self.memory[coor[0]][coor[1]]
+    
+
+class Screen:
+    def __init__(self, resolution, canva):
+        self.resolution = resolution
+        self.memory = Memory()
+        self.cv = canva
+        
+        #Locks redimensioning of screen
+        self.hasloaded = False
+    def in_screen(self, coor):
+        xcoors = (ceil(-1 * self.resolution.w/2), ceil(self.resolution.w/2))
+        ycoors = (ceil(-1 * self.resolution.h/2), ceil(self.resolution.h/2))     
+        return ((xcoors[0] < coor[0] < xcoors[1]) and (ycoors[0] < coor[1] < ycoors[1]))
+    def render(self):
+        #Make sure that the aspect ratio did not change unexpectedially
+        if not self.hasloaded:
+            for i in range(self.resolution.w):
+                rate(100000)
+                pixel_array = []
+                for j in range(self.resolution.h):
+                    xpos = i - self.resolution.w/2
+                    ypos = j - self.resolution.h/2
+                    position = vec(xpos, ypos, 0)
+                    dimensions=vec(1,1,1)
+                    emissive=True
+                    box_color = vec(i/self.resolution.w, j/self.resolution.h, 1)
+                    pixel = box(pos=position, size=dimensions, color=box_color, emissive=emissive, canvas=self.cv)
+                    pixel_array.append(pixel)
+                #add value to memory for future use
+                self.memory.add_row(pixel_array)
+            #Prevent redimensioning of the screen
+            self.hasloaded = True
+    
+    def render_values(self, cm):
+        #render all new color values from color matrix
+        for i in range(self.resolution.w):
+            rate(1000)
+            for j in range(self.resolution.h):
+                self.memory.get_value((i,j)).color = cm[i][j]
+    
+    def change_value(self, coor, c):
+        self.memory.get_value((coor[0], coor[1])).color = c
+                
+
+#find the next value in the mandelbrot set given a certain z and c value.
+def mandelbrot_next(z, c):
+    return c.add(z.exponiate(2))
+#recursive sequence to iterate through mandelbrot set, total amount of times
+def iterate_mandelbrot(z, c, max_iterations=100):
+    if z.magnitude() > 2:
+        return (False, max_iterations)
+    elif max_iterations <= 0:
+        return (True, 0)
+    
+    return iterate_mandelbrot(mandelbrot_next(z,c), c, max_iterations - 1)
+    
+#iterate through i and j
+def mandelbrot(magn, mouse_pos, iterations, area, res):
+    global wt
+    
+    for i in range(res.w):
+        rate(1000)
+        
+        calc = ceil(i/res.w * 10)
+        hashtags = "".join("#" for i in range(calc))
+        wt.text = f"{int(i / res.w * 100)}% [{hashtags}]"
+        
+        for j in range(res.h):
+            #given coordinate of mouse, convert into valid coordinates for the mandelbrot
+            """
+            ===================
+            (-25,25)...(25,25)
+            .               .
+            .     (0,0)     .
+            .               .
+            (-25,-25)..(25,-25)    
+            ===================
+            (0,50)....(50,50)
+            .           .
+            .  (25,25)  .
+            .           .
+            (0,0)...(50,0)
+            ===================
+            """ 
+            #grab the values in relationsip to first graph
+            curr_i = i - res.c[0]
+            curr_j = j - res.c[1]
+            #transform
+            xcor = (curr_i + mouse_pos[0])/(res.c[0]*magn) * 2
+            ycor = (curr_j + mouse_pos[1])/(res.c[0]*magn) * 2
+            
+            area.change_value((i,j), vec(abs(xcor/2), abs(ycor/2), abs(xcor*ycor/2)))
+            
+            complex_num = Complex(xcor, ycor)
+            maddie = iterate_mandelbrot(z=Complex(0,0), c=complex_num, max_iterations=iterations) 
+            if maddie[0]:
+                area.change_value((i,j), vec(0,0,0))
+            else:
+                c = vec(maddie[1]/iterations, 1-maddie[1]/iterations, 2*maddie[1]/iterations)
+                area.change_value((i,j), c)
+                
+   
+#Render the screen properly 
+main_canvas = canvas(resizable=False, userzoom=False,userspin=False,userpan=False,autoscale=True,background=color.white, align="left", width=400, height=400)
+map_canvas = canvas(resizable=False, userzoom=False,userspin=False,userpan=False,autoscale=True,background=color.white, align="right", width=100, height=100)
+res = Resolution(200,200)
+map_res = Resolution(50,50)
+pixels = Screen(res, main_canvas)
+map_pixels = Screen(map_res, map_canvas)
+
+pixels.render()
+map_pixels.render()
+
+#Load mandelbrot
+wt = wtext(text="Loading")
+wt.text = ""
+
+
+mandelbrot(1,(0,0), 100, pixels, res)
+mandelbrot(1, (0,0), 100, map_pixels, map_res)
+
+
+#GTFObin67676767676767676767676767676767676767676767676767676767676767676767676767
+
+#magnificatio
+magnification = 2.0
+curr_mag = 1
+
+curr_center = (0,0)
+#Zoom into a certain area
+while True:
+        rate(30)
+        
+        #Get the mouse coordinates
+        keydown = keysdown()
+        print(keydown)
+        if ('w' in keydown) or ('q' in keydown):
+            myevt = main_canvas.waitfor('click')
+            mpos = main_canvas.mouse.project(point=vec(0,2,0), normal=vec(0,0,1))
+            if mpos:
+                if pixels.in_screen((mpos.x, mpos.y)):
+                    #choose a new resolution and a centerpoint
+                    new_center = (int(mpos.x) + curr_center[0], int(mpos.y) + curr_center[1])
+                    curr_center = new_center
+                    if 'w' in keydown:
+                        curr_mag *= magnification
+                        mandelbrot(curr_mag, new_center, 100,pixels, res)
+                    elif 'q' in keydown:
+                        curr_mag /= magnification
+                        mandelbrot(curr_mag, new_center, 100,pixels, res)
+        elif ('down' in keydown) or ('up' in keydown) or ('left' in keydown) or ('right' in keydown):
+            if 'up' in keydown:
+                curr_center[1] += 10
+                mandelbrot(curr_mag, curr_center, 100,pixels, res)
+            elif 'down' in keydown:
+                curr_center[1] -= 10
+                mandelbrot(curr_mag, curr_center, 100,pixels, res)
+            elif 'left' in keydown:
+                curr_center[0] -= 10
+                mandelbrot(curr_mag, curr_center, 100,pixels, res)
+            else:
+                curr_center[0] += 10
+                mandelbrot(curr_mag, curr_center, 100,pixels, res)
+                
