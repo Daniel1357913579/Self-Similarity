@@ -1,1 +1,1 @@
-# Connecting Mandelbrot's Dynasty to the Logistic Map
+# Connecting Mandelbrot's Set to the Logistic Map
