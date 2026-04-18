@@ -1,0 +1,79 @@
+Web VPython 3.2
+
+
+cobwebGraph = graph(title="Cobweb Plot for the Logistic Map Equation", height=500, width=500)
+r = 2
+initP = 0.5
+
+def renderGraph(r, pval):
+    global cobwebGraph
+    def next(p):
+        return r * p * (1 - p)
+      
+    def inverseNext(p):
+        return ( r + sqrt(r ** 2 - 4 * r * p) ) / ( 2 * r )
+        
+    xy = gcurve(color=color.blue, label="Graph of x=y", graph=cobwebGraph)
+    xy.plot(0,0)
+    xy.plot(1,1)
+    parabola = gcurve(color=color.blue, label="Graph of y=rx(1-x)", graph=cobwebGraph)
+    #plot the parabola
+    for i in range(0, 1, 0.01):
+        parabola.plot(i, next(i))
+    #plot everthing else
+    
+    hCurve = gcurve(color=color.red, graph=cobwebGraph, width=0.3)
+    hCurve.plot(pval, 0)
+    hCurve.plot(pval, next(pval))
+    for i in range(1000):
+        vCurve = gcurve(color=color.red, graph=cobwebGraph, width=0.3)
+        vCurve.plot(pval, next(pval))
+        vCurve.plot(next(pval), next(pval))
+
+        hCurve = gcurve(color=color.red, graph=cobwebGraph, width=0.3)
+        hCurve.plot(next(pval), next(pval))
+        hCurve.plot(next(pval), next(next(pval)))
+        
+        
+#        hCurve.plot(inverseNext(pval), pval)
+#        vCurve.plot(inverseNext(pval), inverseNext(pval))
+        
+        pval = next(pval)
+def changeR(evt):
+    global cobwebGraph
+    global r 
+    global initP
+    cobwebGraph.delete()
+    if evt.id is 'changeR':
+        r = evt.value
+        cobwebGraph = graph(title="Cobweb Plot for the Logistic Map Equation", height=500, width=500)
+        renderGraph(r, initP)
+    if evt.id is 'changeP':
+        initP = evt.value
+        cobwebGraph = graph(title="Cobweb Plot for the Logistic Map Equation", height=500, width=500)
+        renderGraph(r, initP)     
+rSlider = slider(bind=changeR, min=-2, max=4, value=r, step=0.01, id="changeR")
+rtext = wtext(text=f"bifurcation constant: {r} \n")
+pSlider = slider(bind=changeR, min=0.001, max=0.999, value=initP, step=0.01, id="changeP")
+ptext = wtext(text=f"seed: {initP} \n")
+scene.delete() 
+renderGraph(r, initP)
+
+while True:
+    rate(100)
+    rtext.text = f"bifurcation constant: {r} \n"
+    ptext.text = f"seed: {initP} \n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
